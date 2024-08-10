@@ -9,7 +9,7 @@ typedef struct {
   unsigned int x;
   unsigned int y;
 } POS;
-#define BUFFER_LEN  3
+#define BUFFER_LEN  4
 POS buffer[BUFFER_LEN] = { {-1,-1} };
 
 bool touch_read(int&x, int &y) {
@@ -52,6 +52,7 @@ bool touch_read(int&x, int &y) {
   // delay(100);
   // if( x == 0 && y == 0)
   //   return false;
+if(1) {
   memcpy(&buffer[0], &buffer[1], sizeof(POS)*(BUFFER_LEN-1));
   buffer[BUFFER_LEN-1] = { x,y };
   int c = 0;
@@ -68,5 +69,9 @@ bool touch_read(int&x, int &y) {
 
   x = sum.x / c;
   y = sum.y / c;
+}
+else {
+  if( x == 0 && y == 0) return false;
+}
   return true;
 }
